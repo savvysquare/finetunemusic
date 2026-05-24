@@ -67,7 +67,7 @@ function Home() {
     <div>
       {/* CINEMATIC HERO */}
       <section className="relative h-[92vh] min-h-[640px] w-full overflow-hidden">
-        <img src={hero} alt="FineTune Music live" className="absolute inset-0 h-full w-full object-cover scale-105 object-[center_65%]" />
+        <img src={hero} alt="FineTune Music live" className="absolute inset-0 h-full w-full object-cover scale-105 object-[center_72%]" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-background" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/30" />
 
