@@ -61,7 +61,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head><HeadContent /></head>
       <body suppressHydrationWarning>{children}<Scripts /></body>
     </html>
@@ -77,7 +77,7 @@ function RootComponent() {
         <main className="flex-1"><Outlet /></main>
         <SiteFooter />
         <WhatsAppButton />
-        <Toaster position="top-center" richColors />
+        <Toaster theme="dark" position="top-center" richColors />
       </div>
     </QueryClientProvider>
   );
