@@ -6,7 +6,7 @@
 
 @theme inline {
   --font-sans: 'Inter', system-ui, sans-serif;
-  --font-display: 'Fraunces', 'Times New Roman', serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -84,7 +84,9 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  h1,h2,h3,h4 { font-family: var(--font-display); letter-spacing: -0.025em; }
+  h1,h2,h3,h4 { font-family: var(--font-display); letter-spacing: -1px; font-weight: 600; }
+  body { font-family: var(--font-sans); }
+  p, li, span, a, button, input, textarea, label { font-family: var(--font-sans); }
 }
 
 @layer utilities {
