@@ -15,7 +15,7 @@ const nav = [
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-50 bg-background/85 backdrop-blur border-b border-dashed border-border">
+    <header className="sticky top-0 z-50 bg-background/85 backdrop-blur border-b border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5 group">
           <img src={logo} alt="FineTune Music" className="h-8 w-8 rounded-full object-cover" />
@@ -39,7 +39,7 @@ export function SiteHeader() {
         </div>
       </div>
       {open && (
-        <div className="md:hidden border-t border-dashed border-border px-4 py-3 flex flex-col gap-1 bg-background">
+        <div className="md:hidden border-t border-border px-4 py-3 flex flex-col gap-1 bg-background">
           {nav.map((n) => (
             <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground">
               {n.label}
