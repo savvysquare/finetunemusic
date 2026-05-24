@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Play, Pause, Heart, Church, Radio, GraduationCap, Music2, Mic2, Users, MapPin } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
-import hero from "@/assets/performance-1.jpg";
-import leader from "@/assets/leader.jpg";
+import hero from "@/assets/leader.jpg";
+import leader from "@/assets/performance-1.jpg";
 import g3 from "@/assets/gallery-3.jpg";
 
 export const Route = createFileRoute("/")({
