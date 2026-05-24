@@ -15,13 +15,16 @@ function Home() {
   return (
     <div className="mx-auto max-w-6xl px-6 sm:px-10">
       {/* HERO — editorial, generous whitespace */}
-      <section className="pt-20 sm:pt-32 pb-24">
-        <div className="label-mono">FineTune Music · Est. 2015 · Lagos</div>
-        <h1 className="mt-10 text-mega text-[44px] sm:text-[64px] lg:text-[80px] max-w-4xl">
+      <section className="pt-16 sm:pt-24 pb-20">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="label-mono">Live Band · Est. 2015 · Lagos</div>
+          <div className="label-mono">Available for 2025 bookings</div>
+        </div>
+        <h1 className="mt-12 text-mega text-[40px] sm:text-[58px] lg:text-[72px] max-w-4xl">
           A band that <em>edifies</em><br/>the music mind.
         </h1>
-        <div className="mt-16 grid lg:grid-cols-[1.2fr_1fr] gap-12 items-end">
-          <p className="text-lg sm:text-xl text-foreground/75 max-w-xl leading-relaxed">
+        <div className="mt-14 grid lg:grid-cols-[1.2fr_1fr] gap-12 items-end">
+          <p className="text-base sm:text-lg text-foreground/70 max-w-xl leading-relaxed">
             FineTune Music is a contemporary repertoire band and educational consult — performing weddings, concerts, ceremonies and worship services across Nigeria, while raising the next generation of instrumentalists.
           </p>
           <div className="flex flex-wrap items-center gap-3 lg:justify-end">
@@ -75,7 +78,10 @@ function Home() {
       {/* WORK / SERVICES — editorial list */}
       <section className="editorial-rule py-24">
         <div className="grid lg:grid-cols-[1fr_2fr] gap-12 mb-16">
-          <div className="label-mono">What we do</div>
+          <div>
+            <div className="num-tag">(01) — What we do</div>
+            <div className="label-mono mt-3">Services</div>
+          </div>
           <h2 className="text-mega text-3xl sm:text-4xl lg:text-5xl">
             Three pillars. <em>One sound.</em>
           </h2>
@@ -102,8 +108,9 @@ function Home() {
       <section className="editorial-rule py-24">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <div>
-            <div className="label-mono">Selected work</div>
-            <h2 className="mt-6 text-mega text-3xl sm:text-4xl lg:text-5xl">Hear the band.</h2>
+            <div className="num-tag">(02) — Selected work</div>
+            <div className="label-mono mt-3">Music</div>
+            <h2 className="mt-5 text-mega text-3xl sm:text-4xl lg:text-5xl">Hear the band.</h2>
           </div>
           <Link to="/music" className="pill pill-ghost">All tracks <ArrowUpRight className="h-4 w-4" /></Link>
         </div>
@@ -118,8 +125,9 @@ function Home() {
           <img src={leader} alt="Banjo Henry" className="absolute inset-0 h-full w-full object-cover" />
         </div>
         <div className="lg:pt-12">
-          <div className="label-mono">A note from the founder</div>
-          <h2 className="mt-6 text-mega text-3xl sm:text-4xl">
+          <div className="num-tag">(03) — A note from the founder</div>
+          <div className="label-mono mt-3">About</div>
+          <h2 className="mt-5 text-mega text-3xl sm:text-4xl">
             Birthed in Lagos. <em>Built for the world.</em>
           </h2>
           <p className="mt-8 text-foreground/75 leading-relaxed text-lg">
@@ -143,8 +151,9 @@ function Home() {
       <section className="editorial-rule py-24">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <div>
-            <div className="label-mono">Gallery</div>
-            <h2 className="mt-6 text-mega text-3xl sm:text-4xl lg:text-5xl">On stage.</h2>
+            <div className="num-tag">(04) — Gallery</div>
+            <div className="label-mono mt-3">On stage</div>
+            <h2 className="mt-5 text-mega text-3xl sm:text-4xl lg:text-5xl">On stage.</h2>
           </div>
           <Link to="/gallery" className="pill pill-ghost">Full gallery <ArrowUpRight className="h-4 w-4" /></Link>
         </div>
@@ -158,7 +167,8 @@ function Home() {
 
       {/* CTA — editorial closer */}
       <section className="editorial-rule py-32 text-center">
-        <div className="label-mono">Booking · Available now</div>
+        <div className="num-tag">(05) — Booking</div>
+        <div className="label-mono mt-3 justify-center">Available now</div>
         <h2 className="mt-10 text-mega text-4xl sm:text-5xl lg:text-6xl max-w-3xl mx-auto">
           Let's make your moment <em>unforgettable.</em>
         </h2>
