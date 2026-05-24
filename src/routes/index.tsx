@@ -103,7 +103,7 @@ function Home() {
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <div>
             <div className="label-mono">Selected work</div>
-            <h2 className="mt-6 text-mega text-4xl sm:text-6xl">Hear the band.</h2>
+            <h2 className="mt-6 text-mega text-3xl sm:text-4xl lg:text-5xl">Hear the band.</h2>
           </div>
           <Link to="/music" className="pill pill-ghost">All tracks <ArrowUpRight className="h-4 w-4" /></Link>
         </div>
