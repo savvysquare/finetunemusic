@@ -76,7 +76,7 @@ function Home() {
       <section className="editorial-rule py-24">
         <div className="grid lg:grid-cols-[1fr_2fr] gap-12 mb-16">
           <div className="label-mono">What we do</div>
-          <h2 className="text-mega text-4xl sm:text-6xl">
+          <h2 className="text-mega text-3xl sm:text-4xl lg:text-5xl">
             Three pillars. <em>One sound.</em>
           </h2>
         </div>
