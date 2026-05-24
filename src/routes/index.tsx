@@ -1,14 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, Play, Heart, Church, Radio, GraduationCap, Music2, Mic2 } from "lucide-react";
+import { ArrowUpRight, Play, Pause, Heart, Church, Radio, GraduationCap, Music2, Mic2, Users, MapPin } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
 import hero from "@/assets/performance-1.jpg";
 import leader from "@/assets/leader.jpg";
-import group from "@/assets/group.jpg";
-import g1 from "@/assets/gallery-1.jpg";
-import g2 from "@/assets/gallery-2.jpg";
 import g3 from "@/assets/gallery-3.jpg";
-import g4 from "@/assets/gallery-4.jpg";
-import g5 from "@/assets/gallery-5.jpg";
-import g6 from "@/assets/gallery-6.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -20,22 +15,39 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const SERVICES = [
-  { icon: Heart, title: "Weddings & Ceremonies", desc: "Full live band coverage for marriages, naming ceremonies, anniversaries, house warmings and burials.", tag: "Live Band" },
-  { icon: Church, title: "Religious Services", desc: "Praise teams, guest ministers, conventions, retreats, praise nights and concerts.", tag: "Ministration" },
-  { icon: Radio, title: "Street Jamz", desc: "Outdoor live concerts twice a year — secular and praise-and-worship formats for the community.", tag: "Outreach" },
-  { icon: GraduationCap, title: "School of Music", desc: "Voice training, instrumentation, performance, and artist development under seasoned tutors.", tag: "Education" },
-  { icon: Music2, title: "FT Studio", desc: "A fully equipped recording studio for albums, singles, and end-to-end artist production.", tag: "Production" },
+const SERVICE_STACKS = [
+  {
+    name: "Education",
+    items: [
+      { icon: Mic2, title: "School of Music", desc: "Voice training, genre mastery, performance, and artist development." },
+      { icon: Music2, title: "School of Instrumentalists", desc: "Drums, keys, bass — raising instrumentalists for any stage." },
+      { icon: Users, title: "Campus Invasion", desc: "Live concerts with campus fellowships and institutional artists." },
+    ],
+  },
+  {
+    name: "Entertainment",
+    items: [
+      { icon: Heart, title: "Weddings & Ceremonies", desc: "Full live band for marriages, naming ceremonies, anniversaries, burials." },
+      { icon: Church, title: "Religious Services", desc: "Praise teams, guest ministers, conventions, retreats, praise nights." },
+      { icon: Radio, title: "Street Jamz", desc: "Outdoor live concerts — secular and praise formats for communities." },
+      { icon: MapPin, title: "Rural Invasion", desc: "Annual missions tour — music to uplift and reach the unreached." },
+    ],
+  },
+  {
+    name: "Promotion",
+    items: [
+      { icon: Music2, title: "FT Studio", desc: "Fully equipped studio for album production and artist development." },
+      { icon: Radio, title: "Artist Promotion", desc: "Partnerships giving gospel artists the visibility their gift deserves." },
+      { icon: GraduationCap, title: "Talent Development", desc: "End-to-end nurturing from raw talent to stage-ready artist." },
+    ],
+  },
 ];
 
-const TRACKLIST = [
-  { n: "01", t: "Mega Family Live", d: "05:12" },
-  { n: "02", t: "Worship Atmosphere", d: "04:38" },
-  { n: "03", t: "Street Jamz", d: "03:55" },
-  { n: "04", t: "All for Your Glory", d: "06:21" },
-  { n: "05", t: "Aso Ebi (Wedding Cut)", d: "04:02" },
-  { n: "06", t: "Highlife Interlude", d: "03:18" },
-];
+const TRACKLIST = Array.from({ length: 7 }, (_, i) => ({
+  n: String(i + 1).padStart(2, "0"),
+  t: `Track ${i + 1}`,
+  src: `/audio/track${i + 1}.mp3`,
+}));
 
 const ALBUMS = [
   { title: "Mega Family Live", year: "2024", cover: "/images/cover1.jpg" },
@@ -66,7 +78,6 @@ function Home() {
             really <span className="text-gold italic font-light">live.</span>
           </h1>
 
-          {/* floating album card */}
           <div className="mt-12 lg:absolute lg:right-10 lg:bottom-24 lg:mt-0">
             <div className="flex items-center gap-5 bg-card/90 backdrop-blur-md border border-border rounded-2xl p-4 pr-6 max-w-md shadow-2xl">
               <div className="relative h-20 w-20 shrink-0 rounded-xl overflow-hidden">
@@ -112,7 +123,7 @@ function Home() {
         </div>
       </section>
 
-      {/* SERVICES (replaces tour) */}
+      {/* SERVICES — three stacks */}
       <section className="border-y border-border bg-card/40">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 py-24">
           <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
@@ -125,24 +136,36 @@ function Home() {
             <Link to="/services" className="pill pill-ghost">All services <ArrowUpRight className="h-4 w-4" /></Link>
           </div>
 
-          <div className="divide-y divide-border border-y border-border">
-            {SERVICES.map((s) => (
-              <Link key={s.title} to="/book" className="grid grid-cols-[auto_1fr_auto] sm:grid-cols-[80px_1fr_1fr_auto] gap-6 items-center py-7 group hover:bg-card/60 transition px-2">
-                <div className="h-14 w-14 rounded-2xl border border-border flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-background transition">
-                  <s.icon className="h-6 w-6" />
+          <div className="grid lg:grid-cols-3 gap-8">
+            {SERVICE_STACKS.map((stack, idx) => (
+              <div key={stack.name} className="relative rounded-3xl border border-border bg-background/40 p-7 flex flex-col">
+                <div className="flex items-baseline justify-between mb-6">
+                  <div className="font-mono text-xs text-gold">({String(idx + 1).padStart(2, "0")})</div>
+                  <div className="label-mono">Stack {idx + 1}</div>
                 </div>
-                <div className="font-display text-xl sm:text-2xl font-semibold uppercase tracking-tight">{s.title}</div>
-                <div className="hidden sm:block text-sm text-muted-foreground max-w-md">{s.desc}</div>
-                <div className="text-xs uppercase tracking-widest text-gold whitespace-nowrap flex items-center gap-2">
-                  {s.tag} <ArrowUpRight className="h-3.5 w-3.5" />
-                </div>
-              </Link>
+                <h3 className="font-display font-extrabold uppercase tracking-tighter text-3xl sm:text-4xl text-gold mb-8">
+                  {stack.name}.
+                </h3>
+                <ul className="divide-y divide-border border-t border-border flex-1">
+                  {stack.items.map((it) => (
+                    <li key={it.title} className="py-5 flex gap-4 group">
+                      <div className="h-10 w-10 shrink-0 rounded-xl border border-border flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-background transition">
+                        <it.icon className="h-5 w-5" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="font-display font-semibold uppercase tracking-tight text-base">{it.title}</div>
+                        <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{it.desc}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* TRACKLIST + ALBUM ART */}
+      {/* TRACKLIST + ALBUM ART — playable */}
       <section className="mx-auto max-w-7xl px-6 sm:px-10 py-28 grid lg:grid-cols-[1fr_1.2fr] gap-16 items-center">
         <div className="relative aspect-square overflow-hidden rounded-3xl group">
           <img src="/images/cover1.jpg" alt="Mega Family Live" className="absolute inset-0 h-full w-full object-cover" />
@@ -150,7 +173,7 @@ function Home() {
           <div className="absolute bottom-8 left-8 right-8">
             <div className="label-mono text-foreground/80 mb-2">Featured Album</div>
             <div className="font-display text-3xl font-extrabold uppercase">Mega Family Live</div>
-            <div className="text-sm text-foreground/70 mt-1">FineTune Music · 2024 · 12 Tracks</div>
+            <div className="text-sm text-foreground/70 mt-1">FineTune Music · 2024 · 7 Tracks</div>
           </div>
         </div>
         <div>
@@ -158,18 +181,7 @@ function Home() {
           <h2 className="font-display font-extrabold uppercase tracking-tighter text-3xl sm:text-5xl leading-[0.95] mb-10">
             Mega Family <span className="text-gold italic font-light">live.</span>
           </h2>
-          <ul className="divide-y divide-border border-y border-border">
-            {TRACKLIST.map((tr) => (
-              <li key={tr.n} className="grid grid-cols-[40px_1fr_auto_auto] items-center gap-4 py-4 group">
-                <span className="font-mono text-xs text-muted-foreground">{tr.n}</span>
-                <span className="font-display text-base sm:text-lg font-semibold group-hover:text-gold transition">{tr.t}</span>
-                <span className="font-mono text-xs text-muted-foreground">{tr.d}</span>
-                <button className="h-8 w-8 rounded-full bg-border/40 group-hover:bg-gold group-hover:text-background flex items-center justify-center transition">
-                  <Play className="h-3.5 w-3.5 ml-0.5" fill="currentColor" />
-                </button>
-              </li>
-            ))}
-          </ul>
+          <Tracklist />
         </div>
       </section>
 
@@ -217,7 +229,7 @@ function Home() {
         </div>
       </section>
 
-      {/* MUSIC VIDEOS — no labels */}
+      {/* MUSIC VIDEOS */}
       <section className="mx-auto max-w-7xl px-6 sm:px-10 py-28">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
           <div>
@@ -235,34 +247,8 @@ function Home() {
         </div>
       </section>
 
-      {/* GALLERY — fresh photos, no video posters, no repeats */}
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 py-24">
-          <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
-            <div>
-              <div className="label-mono mb-4">Our Gallery</div>
-              <h2 className="font-display font-extrabold uppercase tracking-tighter text-4xl sm:text-6xl leading-[0.95]">
-                Captured moments <span className="text-gold italic font-light">on stage.</span>
-              </h2>
-            </div>
-            <Link to="/gallery" className="pill pill-ghost">Full gallery <ArrowUpRight className="h-4 w-4" /></Link>
-          </div>
-
-          <div className="grid grid-cols-12 auto-rows-[140px] sm:auto-rows-[180px] gap-3 sm:gap-4">
-            <GalleryTile src={g1} alt="Stage silhouette" className="col-span-12 sm:col-span-7 row-span-3" />
-            <GalleryTile src={leader} alt="HenriHope frontman" className="col-span-6 sm:col-span-5 row-span-2" />
-            <GalleryTile src={g2} alt="Drummer close up" className="col-span-6 sm:col-span-5 row-span-1" />
-            <GalleryTile src={g3} alt="Crowd worship" className="col-span-12 sm:col-span-8 row-span-2" />
-            <GalleryTile src={g4} alt="Saxophonist" className="col-span-6 sm:col-span-4 row-span-2" />
-            <GalleryTile src={g5} alt="Vocalist in worship" className="col-span-6 sm:col-span-4 row-span-2" />
-            <GalleryTile src={group} alt="The FineTune team" className="col-span-6 sm:col-span-4 row-span-2" />
-            <GalleryTile src={g6} alt="Studio mic" className="col-span-12 sm:col-span-4 row-span-2" />
-          </div>
-        </div>
-      </section>
-
-      {/* CTA — NEW MUSIC ON THE WAY */}
-      <section className="relative overflow-hidden">
+      {/* CTA */}
+      <section className="relative overflow-hidden border-t border-border">
         <img src={g3} alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 sm:px-10 py-32 text-center">
@@ -278,6 +264,74 @@ function Home() {
         </div>
       </section>
     </div>
+  );
+}
+
+function Tracklist() {
+  const [activeIdx, setActiveIdx] = useState<number | null>(null);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState<Record<number, string>>({});
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    TRACKLIST.forEach((tr, i) => {
+      const a = new Audio();
+      a.preload = "metadata";
+      a.src = tr.src;
+      a.addEventListener("loadedmetadata", () => {
+        const m = Math.floor(a.duration / 60);
+        const s = Math.floor(a.duration % 60).toString().padStart(2, "0");
+        setDuration((d) => ({ ...d, [i]: `${m}:${s}` }));
+      });
+    });
+  }, []);
+
+  const toggle = (i: number) => {
+    if (activeIdx === i && audioRef.current && !audioRef.current.paused) {
+      audioRef.current.pause();
+      setActiveIdx(null);
+      return;
+    }
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+    const a = new Audio(TRACKLIST[i].src);
+    audioRef.current = a;
+    a.addEventListener("timeupdate", () => {
+      setProgress((a.currentTime / (a.duration || 1)) * 100);
+    });
+    a.addEventListener("ended", () => {
+      setActiveIdx(null);
+      setProgress(0);
+    });
+    a.play();
+    setActiveIdx(i);
+    setProgress(0);
+  };
+
+  return (
+    <ul className="divide-y divide-border border-y border-border">
+      {TRACKLIST.map((tr, i) => {
+        const isActive = activeIdx === i;
+        return (
+          <li key={tr.n} className="relative grid grid-cols-[40px_1fr_auto_auto] items-center gap-4 py-4 group">
+            <span className={`font-mono text-xs ${isActive ? "text-gold" : "text-muted-foreground"}`}>{tr.n}</span>
+            <span className={`font-display text-base sm:text-lg font-semibold transition ${isActive ? "text-gold" : "group-hover:text-gold"}`}>{tr.t}</span>
+            <span className="font-mono text-xs text-muted-foreground">{duration[i] ?? "—:—"}</span>
+            <button
+              onClick={() => toggle(i)}
+              aria-label={isActive ? "Pause" : "Play"}
+              className={`h-8 w-8 rounded-full flex items-center justify-center transition ${isActive ? "bg-gold text-background" : "bg-border/40 group-hover:bg-gold group-hover:text-background"}`}
+            >
+              {isActive ? <Pause className="h-3.5 w-3.5" fill="currentColor" /> : <Play className="h-3.5 w-3.5 ml-0.5" fill="currentColor" />}
+            </button>
+            {isActive && (
+              <div className="absolute bottom-0 left-0 h-px bg-gold transition-all" style={{ width: `${progress}%` }} />
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
@@ -302,14 +356,5 @@ function VideoCard({ src, poster }: { src: string; poster: string }) {
         </div>
       </div>
     </div>
-  );
-}
-
-function GalleryTile({ src, alt, className }: { src: string; alt: string; className?: string }) {
-  return (
-    <figure className={`relative overflow-hidden rounded-2xl group ${className ?? ""}`}>
-      <img src={src} alt={alt} loading="lazy" className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" />
-      <figcaption className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">{alt}</figcaption>
-    </figure>
   );
 }
