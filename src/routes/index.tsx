@@ -58,7 +58,7 @@ function Home() {
 
       {/* MARQUEE — quiet */}
       <div className="editorial-rule overflow-hidden py-8">
-        <div className="marquee whitespace-nowrap flex gap-16 text-3xl text-display text-foreground/40">
+        <div className="marquee whitespace-nowrap flex gap-16 text-xl sm:text-2xl text-display text-foreground/40">
           {[...Array(2)].map((_,i)=>(<span key={i} className="flex items-center gap-16 px-8">
             <span>Weddings</span><span className="text-gold">·</span>
             <span>Concerts</span><span className="text-gold">·</span>
