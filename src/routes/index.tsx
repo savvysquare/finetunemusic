@@ -78,7 +78,10 @@ function Home() {
       {/* WORK / SERVICES — editorial list */}
       <section className="editorial-rule py-24">
         <div className="grid lg:grid-cols-[1fr_2fr] gap-12 mb-16">
-          <div className="label-mono">What we do</div>
+          <div>
+            <div className="num-tag">(01) — What we do</div>
+            <div className="label-mono mt-3">Services</div>
+          </div>
           <h2 className="text-mega text-3xl sm:text-4xl lg:text-5xl">
             Three pillars. <em>One sound.</em>
           </h2>
