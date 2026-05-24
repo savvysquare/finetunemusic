@@ -15,13 +15,16 @@ function Home() {
   return (
     <div className="mx-auto max-w-6xl px-6 sm:px-10">
       {/* HERO — editorial, generous whitespace */}
-      <section className="pt-20 sm:pt-32 pb-24">
-        <div className="label-mono">FineTune Music · Est. 2015 · Lagos</div>
-        <h1 className="mt-10 text-mega text-[44px] sm:text-[64px] lg:text-[80px] max-w-4xl">
+      <section className="pt-16 sm:pt-24 pb-20">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="label-mono">Live Band · Est. 2015 · Lagos</div>
+          <div className="label-mono">Available for 2025 bookings</div>
+        </div>
+        <h1 className="mt-12 text-mega text-[40px] sm:text-[58px] lg:text-[72px] max-w-4xl">
           A band that <em>edifies</em><br/>the music mind.
         </h1>
-        <div className="mt-16 grid lg:grid-cols-[1.2fr_1fr] gap-12 items-end">
-          <p className="text-lg sm:text-xl text-foreground/75 max-w-xl leading-relaxed">
+        <div className="mt-14 grid lg:grid-cols-[1.2fr_1fr] gap-12 items-end">
+          <p className="text-base sm:text-lg text-foreground/70 max-w-xl leading-relaxed">
             FineTune Music is a contemporary repertoire band and educational consult — performing weddings, concerts, ceremonies and worship services across Nigeria, while raising the next generation of instrumentalists.
           </p>
           <div className="flex flex-wrap items-center gap-3 lg:justify-end">
