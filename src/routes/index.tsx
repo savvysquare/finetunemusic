@@ -38,7 +38,7 @@ function Home() {
         </div>
         <div className="mt-6 flex flex-wrap justify-between gap-4 text-sm text-muted-foreground">
           <span>Live at concert · Lagos</span>
-          <span className="text-display italic text-foreground">FineTune Music — 2024</span>
+          <span className="text-display text-foreground">FineTune Music — 2024</span>
         </div>
       </section>
 
@@ -131,7 +131,7 @@ function Home() {
           <div className="mt-10 flex items-center gap-4">
             <img src={leader} alt="" className="h-12 w-12 rounded-full object-cover" />
             <div>
-              <div className="text-display italic text-lg">Banjo Henry — HenriHope</div>
+              <div className="text-display text-lg">Banjo Henry — HenriHope</div>
               <div className="text-xs text-muted-foreground tracking-wider uppercase">Founder & Band Leader</div>
             </div>
           </div>
