@@ -1,183 +1,312 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
-import { TrackCard } from "@/components/track-card";
-import { TRACKS } from "@/lib/tracks";
+import { ArrowUpRight, Play } from "lucide-react";
 import hero from "@/assets/performance-1.jpg";
 import leader from "@/assets/leader.jpg";
 import group from "@/assets/group.jpg";
 
 export const Route = createFileRoute("/")({
-  head: () => ({ meta: [{ title: "FineTune Music — Live Band & Music Organization" }, { name: "description", content: "Book FineTune Music — a contemporary repertoire band for concerts, weddings, ceremonies, outreach, and live entertainment across Nigeria." }] }),
+  head: () => ({
+    meta: [
+      { title: "FineTune Music — Live Band & Music Organization" },
+      { name: "description", content: "Book FineTune Music — a contemporary repertoire band for concerts, weddings, ceremonies, outreach, and live entertainment across Nigeria." },
+    ],
+  }),
   component: Home,
 });
 
+const TOUR = [
+  { day: "12", mon: "Feb", year: "2025", event: "The Experience Concert", city: "Lagos — Nigeria", status: "Sold Out" },
+  { day: "08", mon: "Mar", year: "2025", event: "Royal Wedding — Adekunle x Aisha", city: "Abuja — Nigeria", status: "Private" },
+  { day: "26", mon: "Apr", year: "2025", event: "FineTune Live Sessions Vol. III", city: "Lagos — Nigeria", status: "Get Tickets" },
+  { day: "17", mon: "May", year: "2025", event: "City Worship Outreach", city: "Ibadan — Nigeria", status: "Free Entry" },
+  { day: "21", mon: "Jun", year: "2025", event: "Praise Atmosphere", city: "Port Harcourt — Nigeria", status: "Get Tickets" },
+];
+
+const TRACKLIST = [
+  { n: "01", t: "Mega Family Live", d: "05:12" },
+  { n: "02", t: "Worship Atmosphere", d: "04:38" },
+  { n: "03", t: "Street Jamz", d: "03:55" },
+  { n: "04", t: "All for Your Glory", d: "06:21" },
+  { n: "05", t: "Aso Ebi (Wedding Cut)", d: "04:02" },
+  { n: "06", t: "Highlife Interlude", d: "03:18" },
+];
+
+const ALBUMS = [
+  { title: "Mega Family Live", year: "2024", cover: "/images/cover1.jpg" },
+  { title: "Worship Sessions", year: "2023", cover: "/images/cover2.jpg" },
+  { title: "Street Jamz", year: "2022", cover: "/images/cover3.jpg" },
+];
+
+const VIDEOS = [
+  { src: "/videos/clip1.mp4", poster: "/posters/clip1.jpg", title: "Live at the Experience", tag: "Music Video" },
+  { src: "/videos/clip2.mp4", poster: "/posters/clip2.jpg", title: "Worship Sessions", tag: "Live Cut" },
+  { src: "/videos/clip3.mp4", poster: "/posters/clip3.jpg", title: "Wedding Highlights", tag: "Behind the Scenes" },
+  { src: "/videos/clip4.mp4", poster: "/posters/clip4.jpg", title: "Street Jamz", tag: "Music Video" },
+];
+
 function Home() {
   return (
-    <div className="mx-auto max-w-6xl px-6 sm:px-10">
-      {/* HERO — editorial, generous whitespace */}
-      <section className="pt-16 sm:pt-24 pb-20">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="label-mono">Live Band · Est. 2015 · Lagos</div>
-          <div className="label-mono">Available for 2025 bookings</div>
-        </div>
-        <h1 className="mt-12 text-mega text-[40px] sm:text-[58px] lg:text-[72px] max-w-4xl">
-          A band that <em>edifies</em><br/>the music mind.
-        </h1>
-        <div className="mt-14 grid lg:grid-cols-[1.2fr_1fr] gap-12 items-end">
-          <p className="text-base sm:text-lg text-foreground/70 max-w-xl leading-relaxed">
-            FineTune Music is a contemporary repertoire band and educational consult — performing weddings, concerts, ceremonies and worship services across Nigeria, while raising the next generation of instrumentalists.
-          </p>
-          <div className="flex flex-wrap items-center gap-3 lg:justify-end">
-            <Link to="/book" className="pill pill-primary">Book the band <ArrowUpRight className="h-4 w-4" /></Link>
-            <Link to="/music" className="pill pill-ghost">Listen</Link>
-          </div>
-        </div>
-      </section>
+    <div>
+      {/* CINEMATIC HERO */}
+      <section className="relative h-[92vh] min-h-[640px] w-full overflow-hidden">
+        <img src={hero} alt="FineTune Music live" className="absolute inset-0 h-full w-full object-cover scale-105" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/30" />
 
-      {/* FULL-BLEED HERO IMAGE */}
-      <section className="pb-24">
-        <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
-          <img src={hero} alt="FineTune Music live" className="absolute inset-0 h-full w-full object-cover" />
-        </div>
-        <div className="mt-6 flex flex-wrap justify-between gap-4 text-sm text-muted-foreground">
-          <span>Live at concert · Lagos</span>
-          <span className="text-display text-foreground">FineTune Music — 2024</span>
-        </div>
-      </section>
+        <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 h-full flex flex-col justify-end pb-16 sm:pb-24">
+          <div className="label-mono text-foreground/70 mb-6">Listen to our latest album</div>
+          <h1 className="font-display font-extrabold uppercase tracking-tighter text-[56px] sm:text-[96px] lg:text-[132px] leading-[0.88] max-w-5xl">
+            We play <span className="text-gold italic font-light">loud,</span><br/>
+            really <span className="text-gold italic font-light">live.</span>
+          </h1>
 
-      {/* STATS — editorial row */}
-      <section className="editorial-rule py-16 grid sm:grid-cols-3 gap-10">
-        {[
-          { n: "10+", l: "Years on stage across Nigeria" },
-          { n: "500+", l: "Weddings, concerts & ceremonies" },
-          { n: "20+", l: "Artists trained through our school" },
-        ].map((s) => (
-          <div key={s.n}>
-            <div className="text-display text-4xl sm:text-5xl text-gold">{s.n}</div>
-            <div className="mt-3 text-sm text-muted-foreground max-w-[14rem]">{s.l}</div>
-          </div>
-        ))}
-      </section>
-
-      {/* MARQUEE — quiet */}
-      <div className="editorial-rule overflow-hidden py-8">
-        <div className="marquee whitespace-nowrap flex gap-16 text-xl sm:text-2xl text-display text-foreground/40">
-          {[...Array(2)].map((_,i)=>(<span key={i} className="flex items-center gap-16 px-8">
-            <span>Weddings</span><span className="text-gold">·</span>
-            <span>Concerts</span><span className="text-gold">·</span>
-            <span>Burials</span><span className="text-gold">·</span>
-            <span>Namings</span><span className="text-gold">·</span>
-            <span>House Warmings</span><span className="text-gold">·</span>
-            <span>Street Jamz</span><span className="text-gold">·</span>
-            <span>Outreach</span><span className="text-gold">·</span>
-            <span>Worship</span><span className="text-gold">·</span>
-          </span>))}
-        </div>
-      </div>
-
-      {/* WORK / SERVICES — editorial list */}
-      <section className="editorial-rule py-24">
-        <div className="grid lg:grid-cols-[1fr_2fr] gap-12 mb-16">
-          <div>
-            <div className="num-tag">(01) — What we do</div>
-            <div className="label-mono mt-3">Services</div>
-          </div>
-          <h2 className="text-mega text-3xl sm:text-4xl lg:text-5xl">
-            Three pillars. <em>One sound.</em>
-          </h2>
-        </div>
-        <div className="space-y-0">
-          {[
-            { n: "01", title: "Entertainment", desc: "Live band for weddings, concerts, religious services, naming, burials, street jamz and corporate events." },
-            { n: "02", title: "Education", desc: "FineTune School of Music & School of Instrumentalists — voice, technique, and stage performance." },
-            { n: "03", title: "Promotion", desc: "FT Studio — recording, artist development, and distribution for gospel and contemporary music." },
-          ].map((s) => (
-            <div key={s.n} className="editorial-rule grid sm:grid-cols-[80px_1fr_auto] gap-6 py-10 items-start group">
-              <div className="text-display text-2xl text-gold">{s.n}</div>
-              <div>
-                <h3 className="text-display text-2xl sm:text-3xl">{s.title}</h3>
-                <p className="mt-3 text-foreground/70 max-w-xl">{s.desc}</p>
+          {/* floating album card */}
+          <div className="mt-12 lg:absolute lg:right-10 lg:bottom-24 lg:mt-0">
+            <div className="flex items-center gap-5 bg-card/90 backdrop-blur-md border border-border rounded-2xl p-4 pr-6 max-w-md shadow-2xl">
+              <div className="relative h-20 w-20 shrink-0 rounded-xl overflow-hidden">
+                <img src="/images/cover1.jpg" alt="" className="h-full w-full object-cover" />
               </div>
-              <Link to="/services" className="text-sm text-muted-foreground group-hover:text-gold inline-flex items-center gap-1">Explore <ArrowUpRight className="h-3.5 w-3.5" /></Link>
+              <div className="min-w-0 flex-1">
+                <div className="label-mono text-[0.6rem] mb-1">Now Streaming</div>
+                <div className="text-display text-lg truncate">Mega Family Live</div>
+                <div className="text-xs text-muted-foreground">FineTune Music · 2024</div>
+              </div>
+              <Link to="/music" aria-label="Play" className="h-11 w-11 shrink-0 rounded-full bg-gold text-background flex items-center justify-center hover:scale-110 transition">
+                <Play className="h-5 w-5 ml-0.5" fill="currentColor" />
+              </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ABOUT */}
+      <section className="relative">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 py-28 grid lg:grid-cols-[1.1fr_1fr] gap-16 items-center">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl">
+            <img src={leader} alt="Banjo Henry" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          </div>
+          <div>
+            <div className="label-mono mb-5">About FineTune</div>
+            <h2 className="font-display font-extrabold uppercase tracking-tighter text-4xl sm:text-6xl leading-[0.95]">
+              We Roar Loud, <span className="text-gold italic font-light">really loud.</span>
+            </h2>
+            <p className="mt-8 text-foreground/75 text-lg leading-relaxed">
+              <strong className="text-foreground">FineTune Music</strong> is a contemporary repertoire band birthed in Lagos in 2015 by Banjo Henry — a movement of musicians built on professionalism, hunger, and a relentless love for sound. We play weddings, concerts, worship services, and street jamz across Nigeria.
+            </p>
+            <p className="mt-4 text-foreground/65 leading-relaxed">
+              Registered with the Corporate Affairs Commission as <strong className="text-foreground">FineTune Music World and Educational Consult</strong> (RC 3558250) — and home to FineTune School of Instrumentalists.
+            </p>
+            <div className="mt-10 flex items-center gap-4">
+              <div className="font-display italic text-3xl text-gold">~ HenriHope</div>
+              <div className="h-px flex-1 bg-border" />
+              <div className="text-xs uppercase tracking-widest text-muted-foreground">Founder · Band Leader</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TOUR DATES */}
+      <section className="border-y border-border bg-card/40">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 py-24">
+          <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
+            <div>
+              <div className="label-mono mb-4">Upcoming Tour</div>
+              <h2 className="font-display font-extrabold uppercase tracking-tighter text-4xl sm:text-6xl leading-[0.95]">
+                On the <span className="text-gold italic font-light">road.</span>
+              </h2>
+            </div>
+            <Link to="/book" className="pill pill-ghost">All dates <ArrowUpRight className="h-4 w-4" /></Link>
+          </div>
+
+          <div className="divide-y divide-border border-y border-border">
+            {TOUR.map((t, i) => (
+              <div key={i} className="grid grid-cols-[auto_1fr_auto] sm:grid-cols-[120px_1fr_1fr_auto] gap-6 items-center py-7 group hover:bg-card/60 transition px-2">
+                <div className="flex items-baseline gap-2">
+                  <div className="font-display text-5xl sm:text-6xl font-extrabold text-gold leading-none">{t.day}</div>
+                  <div className="text-xs uppercase tracking-widest text-muted-foreground">
+                    <div>{t.mon}</div>
+                    <div>{t.year}</div>
+                  </div>
+                </div>
+                <div className="font-display text-xl sm:text-2xl font-semibold uppercase tracking-tight">{t.event}</div>
+                <div className="hidden sm:block text-sm uppercase tracking-widest text-muted-foreground">{t.city}</div>
+                <Link to="/book" className="pill pill-primary text-xs whitespace-nowrap">{t.status}</Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TRACKLIST + ALBUM ART */}
+      <section className="mx-auto max-w-7xl px-6 sm:px-10 py-28 grid lg:grid-cols-[1fr_1.2fr] gap-16 items-center">
+        <div className="relative aspect-square overflow-hidden rounded-3xl group">
+          <img src="/images/cover1.jpg" alt="Mega Family Live" className="absolute inset-0 h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-black/70 via-transparent to-transparent" />
+          <div className="absolute bottom-8 left-8 right-8">
+            <div className="label-mono text-foreground/80 mb-2">Featured Album</div>
+            <div className="font-display text-3xl font-extrabold uppercase">Mega Family Live</div>
+            <div className="text-sm text-foreground/70 mt-1">FineTune Music · 2024 · 12 Tracks</div>
+          </div>
+        </div>
+        <div>
+          <div className="label-mono mb-4">Album · Tracklist</div>
+          <h2 className="font-display font-extrabold uppercase tracking-tighter text-3xl sm:text-5xl leading-[0.95] mb-10">
+            Mega Family <span className="text-gold italic font-light">live.</span>
+          </h2>
+          <ul className="divide-y divide-border border-y border-border">
+            {TRACKLIST.map((tr) => (
+              <li key={tr.n} className="grid grid-cols-[40px_1fr_auto_auto] items-center gap-4 py-4 group">
+                <span className="font-mono text-xs text-muted-foreground">{tr.n}</span>
+                <span className="font-display text-base sm:text-lg font-semibold group-hover:text-gold transition">{tr.t}</span>
+                <span className="font-mono text-xs text-muted-foreground">{tr.d}</span>
+                <button className="h-8 w-8 rounded-full bg-border/40 group-hover:bg-gold group-hover:text-background flex items-center justify-center transition">
+                  <Play className="h-3.5 w-3.5 ml-0.5" fill="currentColor" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ALBUMS GRID */}
+      <section className="border-t border-border">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 py-24">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <div className="label-mono justify-center mb-4">Latest Albums</div>
+            <h2 className="font-display font-extrabold uppercase tracking-tighter text-4xl sm:text-6xl leading-[0.95]">
+              Check another <span className="text-gold italic font-light">albums.</span>
+            </h2>
+            <p className="mt-5 text-muted-foreground">Studio recordings and live cuts captured across years of ministry and performance.</p>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-8">
+            {ALBUMS.map((a) => (
+              <div key={a.title} className="group">
+                <div className="relative aspect-square overflow-hidden rounded-2xl">
+                  <img src={a.cover} alt={a.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition flex items-center justify-center">
+                    <div className="h-16 w-16 rounded-full bg-gold text-background flex items-center justify-center opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition">
+                      <Play className="h-6 w-6 ml-0.5" fill="currentColor" />
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-5 flex items-end justify-between">
+                  <div>
+                    <div className="font-display text-xl font-bold uppercase">{a.title}</div>
+                    <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1">Stream on · Spotify · Apple · YouTube</div>
+                  </div>
+                  <div className="font-mono text-xs text-gold">{a.year}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* QUOTE */}
+      <section className="bg-card/40 border-y border-border">
+        <div className="mx-auto max-w-4xl px-6 sm:px-10 py-24 text-center">
+          <div className="font-display text-2xl sm:text-4xl leading-snug italic text-foreground/90">
+            “Beautiful music is the art of the prophets that can calm the agitations of the soul — one of the most magnificent and delightful presents God has given us.”
+          </div>
+          <div className="mt-8 label-mono justify-center">Banjo Henry · HenriHope</div>
+        </div>
+      </section>
+
+      {/* MUSIC VIDEOS */}
+      <section className="mx-auto max-w-7xl px-6 sm:px-10 py-28">
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
+          <div>
+            <div className="label-mono mb-4">Watch</div>
+            <h2 className="font-display font-extrabold uppercase tracking-tighter text-4xl sm:text-6xl leading-[0.95]">
+              Music <span className="text-gold italic font-light">videos.</span>
+            </h2>
+          </div>
+          <p className="text-muted-foreground max-w-sm">Live cuts, behind the scenes, and the energy of FineTune on stage.</p>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-6">
+          {VIDEOS.map((v) => (
+            <VideoCard key={v.src} {...v} />
           ))}
         </div>
       </section>
 
-      {/* MUSIC PREVIEW */}
-      <section className="editorial-rule py-24">
-        <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
-          <div>
-            <div className="num-tag">(02) — Selected work</div>
-            <div className="label-mono mt-3">Music</div>
-            <h2 className="mt-5 text-mega text-3xl sm:text-4xl lg:text-5xl">Hear the band.</h2>
-          </div>
-          <Link to="/music" className="pill pill-ghost">All tracks <ArrowUpRight className="h-4 w-4" /></Link>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {TRACKS.map((t,i) => <TrackCard key={i} track={t} index={i} />)}
-        </div>
-      </section>
-
-      {/* FOUNDER — editorial split */}
-      <section className="editorial-rule py-24 grid lg:grid-cols-[1fr_1.2fr] gap-12 items-start">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-          <img src={leader} alt="Banjo Henry" className="absolute inset-0 h-full w-full object-cover" />
-        </div>
-        <div className="lg:pt-12">
-          <div className="num-tag">(03) — A note from the founder</div>
-          <div className="label-mono mt-3">About</div>
-          <h2 className="mt-5 text-mega text-3xl sm:text-4xl">
-            Birthed in Lagos. <em>Built for the world.</em>
-          </h2>
-          <p className="mt-8 text-foreground/75 leading-relaxed text-lg">
-            FineTune Music was birthed by the inspiration of God Almighty in 2015 by Banjo Henry in Lagos — first as <em>Dexterity Music</em>, then pinned as <strong>FineTune Music</strong>. A contemporary repertoire institution, controlled and induced with professionalism nurtured by experience.
-          </p>
-          <p className="mt-4 text-foreground/70 leading-relaxed">
-            Registered with the Corporate Affairs Commission as <strong>FineTune Music World and Educational Consult</strong> (RC 3558250) since 25th January 2022.
-          </p>
-          <div className="mt-10 flex items-center gap-4">
-            <img src={leader} alt="" className="h-12 w-12 rounded-full object-cover" />
+      {/* GALLERY (unique frames only — no repeats) */}
+      <section className="border-t border-border">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 py-24">
+          <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
             <div>
-              <div className="text-display text-lg">Banjo Henry — HenriHope</div>
-              <div className="text-xs text-muted-foreground tracking-wider uppercase">Founder & Band Leader</div>
+              <div className="label-mono mb-4">Our Gallery</div>
+              <h2 className="font-display font-extrabold uppercase tracking-tighter text-4xl sm:text-6xl leading-[0.95]">
+                Captured moments <span className="text-gold italic font-light">on stage.</span>
+              </h2>
             </div>
+            <Link to="/gallery" className="pill pill-ghost">Full gallery <ArrowUpRight className="h-4 w-4" /></Link>
           </div>
-          <Link to="/about" className="mt-10 pill pill-ghost inline-flex">Read the full story <ArrowUpRight className="h-4 w-4" /></Link>
+
+          <div className="grid grid-cols-12 gap-3 sm:gap-4">
+            <GalleryTile src={hero} alt="Mega Family Live concert" className="col-span-12 sm:col-span-8 aspect-[16/10]" />
+            <GalleryTile src={leader} alt="HenriHope frontman" className="col-span-6 sm:col-span-4 aspect-[4/5]" />
+            <GalleryTile src="/posters/clip5.jpg" alt="Live cut" className="col-span-6 sm:col-span-4 aspect-square" />
+            <GalleryTile src={group} alt="The FineTune team" className="col-span-6 sm:col-span-4 aspect-square" />
+            <GalleryTile src="/posters/clip2.jpg" alt="Worship sessions" className="col-span-12 sm:col-span-4 aspect-square" />
+            <GalleryTile src="/posters/clip3.jpg" alt="Behind the scenes" className="col-span-12 sm:col-span-8 aspect-[16/9]" />
+            <GalleryTile src="/posters/clip1.jpg" alt="On stage" className="col-span-12 sm:col-span-4 aspect-[3/4]" />
+          </div>
         </div>
       </section>
 
-      {/* GALLERY — editorial grid */}
-      <section className="editorial-rule py-24">
-        <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
-          <div>
-            <div className="num-tag">(04) — Gallery</div>
-            <div className="label-mono mt-3">On stage</div>
-            <h2 className="mt-5 text-mega text-3xl sm:text-4xl lg:text-5xl">On stage.</h2>
+      {/* CTA — NEW MUSIC ON THE WAY */}
+      <section className="relative overflow-hidden">
+        <img src="/posters/clip4.jpg" alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
+        <div className="relative z-10 mx-auto max-w-4xl px-6 sm:px-10 py-32 text-center">
+          <div className="label-mono justify-center mb-6">Booking 2025</div>
+          <h2 className="font-display font-extrabold uppercase tracking-tighter text-5xl sm:text-7xl lg:text-8xl leading-[0.9]">
+            New music <span className="text-gold italic font-light">is on<br/>the way.</span>
+          </h2>
+          <p className="mt-8 text-foreground/70 text-lg max-w-xl mx-auto">Book FineTune for your wedding, concert, worship service, or street jam. We respond within 24 hours.</p>
+          <div className="mt-12 flex flex-wrap gap-3 justify-center">
+            <Link to="/book" className="pill pill-primary">Book the band <ArrowUpRight className="h-4 w-4" /></Link>
+            <a href="https://wa.me/2348149732788" target="_blank" rel="noreferrer" className="pill pill-ghost">Chat on WhatsApp</a>
           </div>
-          <Link to="/gallery" className="pill pill-ghost">Full gallery <ArrowUpRight className="h-4 w-4" /></Link>
-        </div>
-        <div className="grid grid-cols-12 gap-4">
-          <div className="col-span-12 sm:col-span-8 aspect-[4/3] overflow-hidden rounded-2xl"><img src={hero} alt="" className="h-full w-full object-cover hover:scale-105 transition-transform duration-700" /></div>
-          <div className="col-span-12 sm:col-span-4 aspect-[3/4] overflow-hidden rounded-2xl"><img src={leader} alt="" className="h-full w-full object-cover hover:scale-105 transition-transform duration-700" /></div>
-          <div className="col-span-6 sm:col-span-4 aspect-square overflow-hidden rounded-2xl"><img src={group} alt="" className="h-full w-full object-cover hover:scale-105 transition-transform duration-700" /></div>
-          <div className="col-span-6 sm:col-span-8 aspect-[2/1] overflow-hidden rounded-2xl"><img src={hero} alt="" className="h-full w-full object-cover hover:scale-105 transition-transform duration-700" /></div>
-        </div>
-      </section>
-
-      {/* CTA — editorial closer */}
-      <section className="editorial-rule py-32 text-center">
-        <div className="num-tag">(05) — Booking</div>
-        <div className="label-mono mt-3 justify-center">Available now</div>
-        <h2 className="mt-10 text-mega text-4xl sm:text-5xl lg:text-6xl max-w-3xl mx-auto">
-          Let's make your moment <em>unforgettable.</em>
-        </h2>
-        <p className="mt-8 text-foreground/70 max-w-xl mx-auto text-lg">Tell us about your event. We respond within 24 hours.</p>
-        <div className="mt-12 flex flex-wrap gap-3 justify-center">
-          <Link to="/book" className="pill pill-primary">Book the band <ArrowUpRight className="h-4 w-4" /></Link>
-          <a href="https://wa.me/2348149732788" target="_blank" rel="noreferrer" className="pill pill-ghost">Chat on WhatsApp</a>
         </div>
       </section>
     </div>
+  );
+}
+
+function VideoCard({ src, poster, title, tag }: { src: string; poster: string; title: string; tag: string }) {
+  return (
+    <div className="group relative aspect-video overflow-hidden rounded-2xl border border-border bg-card">
+      <video
+        src={src}
+        poster={poster}
+        muted
+        loop
+        playsInline
+        preload="none"
+        className="absolute inset-0 h-full w-full object-cover"
+        onMouseEnter={(e) => { (e.currentTarget as HTMLVideoElement).play().catch(() => {}); }}
+        onMouseLeave={(e) => { const v = e.currentTarget as HTMLVideoElement; v.pause(); v.currentTime = 0; }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/40 transition" />
+      <div className="absolute top-5 left-5 label-mono text-foreground/80">{tag}</div>
+      <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
+        <div className="font-display text-xl sm:text-2xl font-extrabold uppercase tracking-tight">{title}</div>
+        <div className="h-12 w-12 shrink-0 rounded-full bg-gold text-background flex items-center justify-center group-hover:scale-110 transition shadow-xl">
+          <Play className="h-5 w-5 ml-0.5" fill="currentColor" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GalleryTile({ src, alt, className }: { src: string; alt: string; className?: string }) {
+  return (
+    <figure className={`relative overflow-hidden rounded-2xl group ${className ?? ""}`}>
+      <img src={src} alt={alt} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" />
+      <figcaption className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">{alt}</figcaption>
+    </figure>
   );
 }
