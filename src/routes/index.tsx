@@ -50,7 +50,7 @@ function Home() {
           { n: "20+", l: "Artists trained through our school" },
         ].map((s) => (
           <div key={s.n}>
-            <div className="text-display text-6xl text-gold">{s.n}</div>
+            <div className="text-display text-4xl sm:text-5xl text-gold">{s.n}</div>
             <div className="mt-3 text-sm text-muted-foreground max-w-[14rem]">{s.l}</div>
           </div>
         ))}
