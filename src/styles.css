@@ -36,7 +36,7 @@
 }
 
 :root {
-  --radius: 0.875rem;
+  --radius: 1.25rem;
   /* Original dark / gold scheme */
   --background: oklch(0.08 0.005 60);
   --foreground: oklch(0.98 0 0);
