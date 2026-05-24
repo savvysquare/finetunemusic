@@ -4,7 +4,7 @@ import logo from "@/assets/logo.jpg";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-dashed border-border mt-24">
+    <footer className="border-t border-border mt-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-14 grid gap-10 md:grid-cols-4">
         <div className="space-y-3">
           <div className="flex items-center gap-2.5">
@@ -41,7 +41,7 @@ export function SiteFooter() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-dashed border-border py-5 text-center text-xs text-muted-foreground">
+      <div className="border-t border-border py-5 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} FineTune Music World & Educational Consult. RC 3558250. #FineTuneMusic #HenriHope
       </div>
     </footer>
