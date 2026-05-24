@@ -74,7 +74,7 @@ function Home() {
         <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 h-full flex flex-col justify-end pb-16 sm:pb-24">
           <div className="label-mono text-foreground/70 mb-6">Listen to our latest album</div>
           <h1 className="font-display font-extrabold uppercase tracking-tighter text-[56px] sm:text-[96px] lg:text-[132px] leading-[0.88] max-w-5xl">
-            We play <span className="text-gold italic font-light">loud,</span><br/>
+            We play <span className="text-gold italic font-light">loud,</span><br className="sm:hidden"/>{" "}
             really <span className="text-gold italic font-light">live.</span>
           </h1>
 
