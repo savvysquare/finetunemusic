@@ -17,9 +17,9 @@ function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-gradient-gold">404</h1>
+        <h1 className="text-display text-7xl font-bold">404</h1>
         <p className="mt-2 text-sm text-muted-foreground">This page is off-key.</p>
-        <Link to="/" className="mt-6 inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">Back home</Link>
+        <Link to="/" className="pill pill-primary mt-6">Back home</Link>
       </div>
     </div>
   );
@@ -51,7 +51,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "stylesheet", href: appCss }, { rel: "preconnect", href: "https://fonts.googleapis.com" }, { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" }, { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" }],
+    links: [{ rel: "stylesheet", href: appCss }, { rel: "preconnect", href: "https://fonts.googleapis.com" }, { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" }, { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Sans:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -61,9 +61,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head><HeadContent /></head>
-      <body>{children}<Scripts /></body>
+      <body suppressHydrationWarning>{children}<Scripts /></body>
     </html>
   );
 }
@@ -77,7 +77,7 @@ function RootComponent() {
         <main className="flex-1"><Outlet /></main>
         <SiteFooter />
         <WhatsAppButton />
-        <Toaster theme="dark" position="top-center" richColors />
+        <Toaster position="top-center" richColors />
       </div>
     </QueryClientProvider>
   );
