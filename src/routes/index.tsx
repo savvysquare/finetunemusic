@@ -119,7 +119,7 @@ function Home() {
         </div>
         <div className="lg:pt-12">
           <div className="label-mono">A note from the founder</div>
-          <h2 className="mt-6 text-mega text-4xl sm:text-5xl">
+          <h2 className="mt-6 text-mega text-3xl sm:text-4xl">
             Birthed in Lagos. <em>Built for the world.</em>
           </h2>
           <p className="mt-8 text-foreground/75 leading-relaxed text-lg">
