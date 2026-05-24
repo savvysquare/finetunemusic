@@ -209,7 +209,6 @@ function Home() {
                 <div className="mt-5 flex items-end justify-between">
                   <div>
                     <div className="font-display text-xl font-bold uppercase">{a.title}</div>
-                    <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1">Stream on · Spotify · Apple · YouTube</div>
                   </div>
                   <div className="font-mono text-xs text-gold">{a.year}</div>
                 </div>
