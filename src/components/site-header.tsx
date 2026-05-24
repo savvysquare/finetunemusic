@@ -29,7 +29,6 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <Link to="/bookings" className="hidden sm:inline text-[13.5px] text-muted-foreground hover:text-foreground">Login</Link>
           <Link to="/book" className="hidden sm:inline-flex pill pill-primary !py-2 !px-4 !text-[13.5px]">
             Book the band
           </Link>
