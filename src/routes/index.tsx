@@ -151,8 +151,9 @@ function Home() {
       <section className="editorial-rule py-24">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <div>
-            <div className="label-mono">Gallery</div>
-            <h2 className="mt-6 text-mega text-3xl sm:text-4xl lg:text-5xl">On stage.</h2>
+            <div className="num-tag">(04) — Gallery</div>
+            <div className="label-mono mt-3">On stage</div>
+            <h2 className="mt-5 text-mega text-3xl sm:text-4xl lg:text-5xl">On stage.</h2>
           </div>
           <Link to="/gallery" className="pill pill-ghost">Full gallery <ArrowUpRight className="h-4 w-4" /></Link>
         </div>
