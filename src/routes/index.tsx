@@ -1,8 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, Play } from "lucide-react";
+import { ArrowUpRight, Play, Heart, Church, Radio, GraduationCap, Music2, Mic2 } from "lucide-react";
 import hero from "@/assets/performance-1.jpg";
 import leader from "@/assets/leader.jpg";
 import group from "@/assets/group.jpg";
+import g1 from "@/assets/gallery-1.jpg";
+import g2 from "@/assets/gallery-2.jpg";
+import g3 from "@/assets/gallery-3.jpg";
+import g4 from "@/assets/gallery-4.jpg";
+import g5 from "@/assets/gallery-5.jpg";
+import g6 from "@/assets/gallery-6.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -14,12 +20,12 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const TOUR = [
-  { day: "12", mon: "Feb", year: "2025", event: "The Experience Concert", city: "Lagos — Nigeria", status: "Sold Out" },
-  { day: "08", mon: "Mar", year: "2025", event: "Royal Wedding — Adekunle x Aisha", city: "Abuja — Nigeria", status: "Private" },
-  { day: "26", mon: "Apr", year: "2025", event: "FineTune Live Sessions Vol. III", city: "Lagos — Nigeria", status: "Get Tickets" },
-  { day: "17", mon: "May", year: "2025", event: "City Worship Outreach", city: "Ibadan — Nigeria", status: "Free Entry" },
-  { day: "21", mon: "Jun", year: "2025", event: "Praise Atmosphere", city: "Port Harcourt — Nigeria", status: "Get Tickets" },
+const SERVICES = [
+  { icon: Heart, title: "Weddings & Ceremonies", desc: "Full live band coverage for marriages, naming ceremonies, anniversaries, house warmings and burials.", tag: "Live Band" },
+  { icon: Church, title: "Religious Services", desc: "Praise teams, guest ministers, conventions, retreats, praise nights and concerts.", tag: "Ministration" },
+  { icon: Radio, title: "Street Jamz", desc: "Outdoor live concerts twice a year — secular and praise-and-worship formats for the community.", tag: "Outreach" },
+  { icon: GraduationCap, title: "School of Music", desc: "Voice training, instrumentation, performance, and artist development under seasoned tutors.", tag: "Education" },
+  { icon: Music2, title: "FT Studio", desc: "A fully equipped recording studio for albums, singles, and end-to-end artist production.", tag: "Production" },
 ];
 
 const TRACKLIST = [
@@ -38,10 +44,10 @@ const ALBUMS = [
 ];
 
 const VIDEOS = [
-  { src: "/videos/clip1.mp4", poster: "/posters/clip1.jpg", title: "Live at the Experience", tag: "Music Video" },
-  { src: "/videos/clip2.mp4", poster: "/posters/clip2.jpg", title: "Worship Sessions", tag: "Live Cut" },
-  { src: "/videos/clip3.mp4", poster: "/posters/clip3.jpg", title: "Wedding Highlights", tag: "Behind the Scenes" },
-  { src: "/videos/clip4.mp4", poster: "/posters/clip4.jpg", title: "Street Jamz", tag: "Music Video" },
+  { src: "/videos/clip1.mp4", poster: "/posters/clip1.jpg" },
+  { src: "/videos/clip2.mp4", poster: "/posters/clip2.jpg" },
+  { src: "/videos/clip3.mp4", poster: "/posters/clip3.jpg" },
+  { src: "/videos/clip4.mp4", poster: "/posters/clip4.jpg" },
 ];
 
 function Home() {
@@ -106,33 +112,31 @@ function Home() {
         </div>
       </section>
 
-      {/* TOUR DATES */}
+      {/* SERVICES (replaces tour) */}
       <section className="border-y border-border bg-card/40">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 py-24">
           <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
             <div>
-              <div className="label-mono mb-4">Upcoming Tour</div>
+              <div className="label-mono mb-4">What we do</div>
               <h2 className="font-display font-extrabold uppercase tracking-tighter text-4xl sm:text-6xl leading-[0.95]">
-                On the <span className="text-gold italic font-light">road.</span>
+                Our <span className="text-gold italic font-light">services.</span>
               </h2>
             </div>
-            <Link to="/book" className="pill pill-ghost">All dates <ArrowUpRight className="h-4 w-4" /></Link>
+            <Link to="/services" className="pill pill-ghost">All services <ArrowUpRight className="h-4 w-4" /></Link>
           </div>
 
           <div className="divide-y divide-border border-y border-border">
-            {TOUR.map((t, i) => (
-              <div key={i} className="grid grid-cols-[auto_1fr_auto] sm:grid-cols-[120px_1fr_1fr_auto] gap-6 items-center py-7 group hover:bg-card/60 transition px-2">
-                <div className="flex items-baseline gap-2">
-                  <div className="font-display text-5xl sm:text-6xl font-extrabold text-gold leading-none">{t.day}</div>
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground">
-                    <div>{t.mon}</div>
-                    <div>{t.year}</div>
-                  </div>
+            {SERVICES.map((s) => (
+              <Link key={s.title} to="/book" className="grid grid-cols-[auto_1fr_auto] sm:grid-cols-[80px_1fr_1fr_auto] gap-6 items-center py-7 group hover:bg-card/60 transition px-2">
+                <div className="h-14 w-14 rounded-2xl border border-border flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-background transition">
+                  <s.icon className="h-6 w-6" />
                 </div>
-                <div className="font-display text-xl sm:text-2xl font-semibold uppercase tracking-tight">{t.event}</div>
-                <div className="hidden sm:block text-sm uppercase tracking-widest text-muted-foreground">{t.city}</div>
-                <Link to="/book" className="pill pill-primary text-xs whitespace-nowrap">{t.status}</Link>
-              </div>
+                <div className="font-display text-xl sm:text-2xl font-semibold uppercase tracking-tight">{s.title}</div>
+                <div className="hidden sm:block text-sm text-muted-foreground max-w-md">{s.desc}</div>
+                <div className="text-xs uppercase tracking-widest text-gold whitespace-nowrap flex items-center gap-2">
+                  {s.tag} <ArrowUpRight className="h-3.5 w-3.5" />
+                </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -213,7 +217,7 @@ function Home() {
         </div>
       </section>
 
-      {/* MUSIC VIDEOS */}
+      {/* MUSIC VIDEOS — no labels */}
       <section className="mx-auto max-w-7xl px-6 sm:px-10 py-28">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
           <div>
@@ -231,7 +235,7 @@ function Home() {
         </div>
       </section>
 
-      {/* GALLERY (unique frames only — no repeats) */}
+      {/* GALLERY — fresh photos, no video posters, no repeats */}
       <section className="border-t border-border">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 py-24">
           <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
@@ -244,21 +248,22 @@ function Home() {
             <Link to="/gallery" className="pill pill-ghost">Full gallery <ArrowUpRight className="h-4 w-4" /></Link>
           </div>
 
-          <div className="grid grid-cols-12 gap-3 sm:gap-4">
-            <GalleryTile src={hero} alt="Mega Family Live concert" className="col-span-12 sm:col-span-8 aspect-[16/10]" />
-            <GalleryTile src={leader} alt="HenriHope frontman" className="col-span-6 sm:col-span-4 aspect-[4/5]" />
-            <GalleryTile src="/posters/clip5.jpg" alt="Live cut" className="col-span-6 sm:col-span-4 aspect-square" />
-            <GalleryTile src={group} alt="The FineTune team" className="col-span-6 sm:col-span-4 aspect-square" />
-            <GalleryTile src="/posters/clip2.jpg" alt="Worship sessions" className="col-span-12 sm:col-span-4 aspect-square" />
-            <GalleryTile src="/posters/clip3.jpg" alt="Behind the scenes" className="col-span-12 sm:col-span-8 aspect-[16/9]" />
-            <GalleryTile src="/posters/clip1.jpg" alt="On stage" className="col-span-12 sm:col-span-4 aspect-[3/4]" />
+          <div className="grid grid-cols-12 auto-rows-[140px] sm:auto-rows-[180px] gap-3 sm:gap-4">
+            <GalleryTile src={g1} alt="Stage silhouette" className="col-span-12 sm:col-span-7 row-span-3" />
+            <GalleryTile src={leader} alt="HenriHope frontman" className="col-span-6 sm:col-span-5 row-span-2" />
+            <GalleryTile src={g2} alt="Drummer close up" className="col-span-6 sm:col-span-5 row-span-1" />
+            <GalleryTile src={g3} alt="Crowd worship" className="col-span-12 sm:col-span-8 row-span-2" />
+            <GalleryTile src={g4} alt="Saxophonist" className="col-span-6 sm:col-span-4 row-span-2" />
+            <GalleryTile src={g5} alt="Vocalist in worship" className="col-span-6 sm:col-span-4 row-span-2" />
+            <GalleryTile src={group} alt="The FineTune team" className="col-span-6 sm:col-span-4 row-span-2" />
+            <GalleryTile src={g6} alt="Studio mic" className="col-span-12 sm:col-span-4 row-span-2" />
           </div>
         </div>
       </section>
 
       {/* CTA — NEW MUSIC ON THE WAY */}
       <section className="relative overflow-hidden">
-        <img src="/posters/clip4.jpg" alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />
+        <img src={g3} alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 sm:px-10 py-32 text-center">
           <div className="label-mono justify-center mb-6">Booking 2025</div>
@@ -276,7 +281,7 @@ function Home() {
   );
 }
 
-function VideoCard({ src, poster, title, tag }: { src: string; poster: string; title: string; tag: string }) {
+function VideoCard({ src, poster }: { src: string; poster: string }) {
   return (
     <div className="group relative aspect-video overflow-hidden rounded-2xl border border-border bg-card">
       <video
@@ -290,10 +295,8 @@ function VideoCard({ src, poster, title, tag }: { src: string; poster: string; t
         onMouseEnter={(e) => { (e.currentTarget as HTMLVideoElement).play().catch(() => {}); }}
         onMouseLeave={(e) => { const v = e.currentTarget as HTMLVideoElement; v.pause(); v.currentTime = 0; }}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/40 transition" />
-      <div className="absolute top-5 left-5 label-mono text-foreground/80">{tag}</div>
-      <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
-        <div className="font-display text-xl sm:text-2xl font-extrabold uppercase tracking-tight">{title}</div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent group-hover:from-black/20 transition" />
+      <div className="absolute bottom-5 right-5">
         <div className="h-12 w-12 shrink-0 rounded-full bg-gold text-background flex items-center justify-center group-hover:scale-110 transition shadow-xl">
           <Play className="h-5 w-5 ml-0.5" fill="currentColor" />
         </div>
@@ -305,7 +308,7 @@ function VideoCard({ src, poster, title, tag }: { src: string; poster: string; t
 function GalleryTile({ src, alt, className }: { src: string; alt: string; className?: string }) {
   return (
     <figure className={`relative overflow-hidden rounded-2xl group ${className ?? ""}`}>
-      <img src={src} alt={alt} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" />
+      <img src={src} alt={alt} loading="lazy" className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" />
       <figcaption className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">{alt}</figcaption>
     </figure>
   );
