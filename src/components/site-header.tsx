@@ -15,7 +15,7 @@ const nav = [
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-50 bg-background/85 backdrop-blur border-b border-dashed border-border">
+    <header className="sticky top-0 z-50 bg-background/85 backdrop-blur border-b border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5 group">
           <img src={logo} alt="FineTune Music" className="h-8 w-8 rounded-full object-cover" />
