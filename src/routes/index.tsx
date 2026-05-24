@@ -17,7 +17,7 @@ function Home() {
       {/* HERO — editorial, generous whitespace */}
       <section className="pt-20 sm:pt-32 pb-24">
         <div className="label-mono">FineTune Music · Est. 2015 · Lagos</div>
-        <h1 className="mt-10 text-mega text-[56px] sm:text-[96px] lg:text-[128px] max-w-5xl">
+        <h1 className="mt-10 text-mega text-[44px] sm:text-[64px] lg:text-[80px] max-w-4xl">
           A band that <em>edifies</em><br/>the music mind.
         </h1>
         <div className="mt-16 grid lg:grid-cols-[1.2fr_1fr] gap-12 items-end">
@@ -50,7 +50,7 @@ function Home() {
           { n: "20+", l: "Artists trained through our school" },
         ].map((s) => (
           <div key={s.n}>
-            <div className="text-display text-6xl text-gold">{s.n}</div>
+            <div className="text-display text-4xl sm:text-5xl text-gold">{s.n}</div>
             <div className="mt-3 text-sm text-muted-foreground max-w-[14rem]">{s.l}</div>
           </div>
         ))}
@@ -58,7 +58,7 @@ function Home() {
 
       {/* MARQUEE — quiet */}
       <div className="editorial-rule overflow-hidden py-8">
-        <div className="marquee whitespace-nowrap flex gap-16 text-3xl text-display text-foreground/40">
+        <div className="marquee whitespace-nowrap flex gap-16 text-xl sm:text-2xl text-display text-foreground/40">
           {[...Array(2)].map((_,i)=>(<span key={i} className="flex items-center gap-16 px-8">
             <span>Weddings</span><span className="text-gold">·</span>
             <span>Concerts</span><span className="text-gold">·</span>
@@ -76,7 +76,7 @@ function Home() {
       <section className="editorial-rule py-24">
         <div className="grid lg:grid-cols-[1fr_2fr] gap-12 mb-16">
           <div className="label-mono">What we do</div>
-          <h2 className="text-mega text-4xl sm:text-6xl">
+          <h2 className="text-mega text-3xl sm:text-4xl lg:text-5xl">
             Three pillars. <em>One sound.</em>
           </h2>
         </div>
@@ -89,7 +89,7 @@ function Home() {
             <div key={s.n} className="editorial-rule grid sm:grid-cols-[80px_1fr_auto] gap-6 py-10 items-start group">
               <div className="text-display text-2xl text-gold">{s.n}</div>
               <div>
-                <h3 className="text-display text-3xl sm:text-4xl">{s.title}</h3>
+                <h3 className="text-display text-2xl sm:text-3xl">{s.title}</h3>
                 <p className="mt-3 text-foreground/70 max-w-xl">{s.desc}</p>
               </div>
               <Link to="/services" className="text-sm text-muted-foreground group-hover:text-gold inline-flex items-center gap-1">Explore <ArrowUpRight className="h-3.5 w-3.5" /></Link>
@@ -103,7 +103,7 @@ function Home() {
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <div>
             <div className="label-mono">Selected work</div>
-            <h2 className="mt-6 text-mega text-4xl sm:text-6xl">Hear the band.</h2>
+            <h2 className="mt-6 text-mega text-3xl sm:text-4xl lg:text-5xl">Hear the band.</h2>
           </div>
           <Link to="/music" className="pill pill-ghost">All tracks <ArrowUpRight className="h-4 w-4" /></Link>
         </div>
@@ -119,7 +119,7 @@ function Home() {
         </div>
         <div className="lg:pt-12">
           <div className="label-mono">A note from the founder</div>
-          <h2 className="mt-6 text-mega text-4xl sm:text-5xl">
+          <h2 className="mt-6 text-mega text-3xl sm:text-4xl">
             Birthed in Lagos. <em>Built for the world.</em>
           </h2>
           <p className="mt-8 text-foreground/75 leading-relaxed text-lg">
@@ -144,7 +144,7 @@ function Home() {
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <div>
             <div className="label-mono">Gallery</div>
-            <h2 className="mt-6 text-mega text-4xl sm:text-6xl">On stage.</h2>
+            <h2 className="mt-6 text-mega text-3xl sm:text-4xl lg:text-5xl">On stage.</h2>
           </div>
           <Link to="/gallery" className="pill pill-ghost">Full gallery <ArrowUpRight className="h-4 w-4" /></Link>
         </div>
@@ -159,7 +159,7 @@ function Home() {
       {/* CTA — editorial closer */}
       <section className="editorial-rule py-32 text-center">
         <div className="label-mono">Booking · Available now</div>
-        <h2 className="mt-10 text-mega text-5xl sm:text-7xl lg:text-8xl max-w-4xl mx-auto">
+        <h2 className="mt-10 text-mega text-4xl sm:text-5xl lg:text-6xl max-w-3xl mx-auto">
           Let's make your moment <em>unforgettable.</em>
         </h2>
         <p className="mt-8 text-foreground/70 max-w-xl mx-auto text-lg">Tell us about your event. We respond within 24 hours.</p>
