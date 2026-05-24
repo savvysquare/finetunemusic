@@ -17,9 +17,9 @@ function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-gradient-gold">404</h1>
+        <h1 className="text-display text-7xl font-bold">404</h1>
         <p className="mt-2 text-sm text-muted-foreground">This page is off-key.</p>
-        <Link to="/" className="mt-6 inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">Back home</Link>
+        <Link to="/" className="pill pill-primary mt-6">Back home</Link>
       </div>
     </div>
   );
