@@ -159,7 +159,7 @@ function Home() {
       {/* CTA — editorial closer */}
       <section className="editorial-rule py-32 text-center">
         <div className="label-mono">Booking · Available now</div>
-        <h2 className="mt-10 text-mega text-5xl sm:text-7xl lg:text-8xl max-w-4xl mx-auto">
+        <h2 className="mt-10 text-mega text-4xl sm:text-5xl lg:text-6xl max-w-3xl mx-auto">
           Let's make your moment <em>unforgettable.</em>
         </h2>
         <p className="mt-8 text-foreground/70 max-w-xl mx-auto text-lg">Tell us about your event. We respond within 24 hours.</p>
