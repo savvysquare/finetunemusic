@@ -125,8 +125,9 @@ function Home() {
           <img src={leader} alt="Banjo Henry" className="absolute inset-0 h-full w-full object-cover" />
         </div>
         <div className="lg:pt-12">
-          <div className="label-mono">A note from the founder</div>
-          <h2 className="mt-6 text-mega text-3xl sm:text-4xl">
+          <div className="num-tag">(03) — A note from the founder</div>
+          <div className="label-mono mt-3">About</div>
+          <h2 className="mt-5 text-mega text-3xl sm:text-4xl">
             Birthed in Lagos. <em>Built for the world.</em>
           </h2>
           <p className="mt-8 text-foreground/75 leading-relaxed text-lg">
