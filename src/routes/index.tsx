@@ -17,7 +17,7 @@ function Home() {
       {/* HERO — editorial, generous whitespace */}
       <section className="pt-20 sm:pt-32 pb-24">
         <div className="label-mono">FineTune Music · Est. 2015 · Lagos</div>
-        <h1 className="mt-10 text-mega text-[56px] sm:text-[96px] lg:text-[128px] max-w-5xl">
+        <h1 className="mt-10 text-mega text-[44px] sm:text-[64px] lg:text-[80px] max-w-4xl">
           A band that <em>edifies</em><br/>the music mind.
         </h1>
         <div className="mt-16 grid lg:grid-cols-[1.2fr_1fr] gap-12 items-end">
