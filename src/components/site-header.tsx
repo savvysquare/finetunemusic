@@ -39,7 +39,7 @@ export function SiteHeader() {
         </div>
       </div>
       {open && (
-        <div className="md:hidden border-t border-dashed border-border px-4 py-3 flex flex-col gap-1 bg-background">
+        <div className="md:hidden border-t border-border px-4 py-3 flex flex-col gap-1 bg-background">
           {nav.map((n) => (
             <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground">
               {n.label}
