@@ -89,7 +89,7 @@ function Home() {
             <div key={s.n} className="editorial-rule grid sm:grid-cols-[80px_1fr_auto] gap-6 py-10 items-start group">
               <div className="text-display text-2xl text-gold">{s.n}</div>
               <div>
-                <h3 className="text-display text-3xl sm:text-4xl">{s.title}</h3>
+                <h3 className="text-display text-2xl sm:text-3xl">{s.title}</h3>
                 <p className="mt-3 text-foreground/70 max-w-xl">{s.desc}</p>
               </div>
               <Link to="/services" className="text-sm text-muted-foreground group-hover:text-gold inline-flex items-center gap-1">Explore <ArrowUpRight className="h-3.5 w-3.5" /></Link>
