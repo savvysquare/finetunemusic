@@ -14,13 +14,16 @@ function Auth() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session) {
-        if (data.session.user.email === "admin@finetunemusic.com") {
-          navigate({ to: "/bookings" });
+    const pwd = sessionStorage.getItem("admin_password");
+    if (pwd === "HenriHope") {
+      supabase.auth.getSession().then(({ data }) => {
+        if (data.session) {
+          if (data.session.user.email === "admin@finetunemusic.com") {
+            navigate({ to: "/bookings" });
+          }
         }
-      }
-    });
+      });
+    }
   }, [navigate]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
