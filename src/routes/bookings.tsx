@@ -39,31 +39,25 @@ function BookingsPage() {
   useEffect(() => { void init(); }, []);
 
   async function init() {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) { navigate({ to: "/auth" }); return; }
-    setAuthedEmail(session.user.email ?? null);
-    setUserId(session.user.id);
-    
-    // Fetch roles for debugging
-    const { data: roles, error: rolesErr } = await supabase.from("user_roles").select("*");
-    
-    setDebugInfo(prev => ({
-      ...prev,
-      sessionUser: {
-        id: session.user.id,
-        email: session.user.email,
-        role: session.user.role,
-      },
-      rolesData: roles,
-      rolesError: rolesErr ? rolesErr.message : null,
-    }));
+    const pwd = sessionStorage.getItem("admin_password");
+    if (pwd !== "HenriHope") {
+      navigate({ to: "/auth" });
+      return;
+    }
 
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      setAuthedEmail(session.user.email ?? null);
+      setUserId(session.user.id);
+    }
+    
     await load();
   }
 
   async function load() {
     setLoading(true);
-    const { data, error } = await supabase.from("bookings").select("*").order("created_at", { ascending: false });
+    const pwd = sessionStorage.getItem("admin_password") || "";
+    const { data, error } = await supabase.rpc("get_bookings_secure", { admin_password: pwd });
     setLoading(false);
     
     setDebugInfo(prev => ({
@@ -72,45 +66,43 @@ function BookingsPage() {
       bookingsCount: data ? data.length : 0,
     }));
 
-    if (error) { setNeedsRole(true); return; }
-    setBookings(data as Booking[]);
-  }
-
-
-  async function grantSelf() {
-    if (!userId) return;
-    // Try self-grant; will only succeed if no admin exists yet (RLS will block subsequent attempts).
-    const { error } = await supabase.from("user_roles").insert({ user_id: userId, role: "admin" });
-    if (error) { toast.error("Could not grant admin. Contact the project owner."); return; }
-    toast.success("Admin granted.");
-    setNeedsRole(false); await load();
+    if (error) { 
+      toast.error("Access denied or session expired. Please sign in again.");
+      sessionStorage.removeItem("admin_password");
+      navigate({ to: "/auth" });
+      return; 
+    }
+    setBookings((data || []) as Booking[]);
   }
 
   async function setStatus(id: string, status: string) {
-    const { error } = await supabase.from("bookings").update({ status }).eq("id", id);
+    const pwd = sessionStorage.getItem("admin_password") || "";
+    const { error } = await supabase.rpc("update_booking_status_secure", {
+      admin_password: pwd,
+      booking_id: id,
+      new_status: status
+    });
     if (error) return toast.error(error.message);
     setBookings(b => b.map(x => x.id === id ? { ...x, status } : x));
   }
 
   async function remove(id: string) {
     if (!confirm("Delete this booking?")) return;
-    const { error } = await supabase.from("bookings").delete().eq("id", id);
+    const pwd = sessionStorage.getItem("admin_password") || "";
+    const { error } = await supabase.rpc("delete_booking_secure", {
+      admin_password: pwd,
+      booking_id: id
+    });
     if (error) return toast.error(error.message);
     setBookings(b => b.filter(x => x.id !== id));
   }
 
-  async function logout() { await supabase.auth.signOut(); navigate({ to: "/auth" }); }
-
-  if (needsRole) {
-    return (
-      <div className="mx-auto max-w-md px-4 sm:px-6 py-20 text-center">
-        <h1 className="font-display text-2xl font-bold">Admin role required</h1>
-        <p className="mt-3 text-sm text-muted-foreground">You're signed in as {authedEmail} but don't have access. If you're the first admin, claim it now.</p>
-        <button onClick={grantSelf} className="mt-6 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground">Claim admin (first user only)</button>
-        <button onClick={logout} className="block mx-auto mt-4 text-xs text-muted-foreground hover:text-primary">Sign out</button>
-      </div>
-    );
+  async function logout() { 
+    sessionStorage.removeItem("admin_password");
+    await supabase.auth.signOut(); 
+    navigate({ to: "/auth" }); 
   }
+
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12">

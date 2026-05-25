@@ -33,6 +33,7 @@ function Auth() {
       return;
     }
 
+    sessionStorage.setItem("admin_password", password);
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
       email: "admin@finetunemusic.com",
