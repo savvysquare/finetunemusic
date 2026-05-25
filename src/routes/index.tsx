@@ -72,7 +72,7 @@ function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/30" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 h-full flex flex-col justify-end pb-16 sm:pb-24">
-          <div className="label-mono text-foreground/70 mb-6">Listen to our latest album</div>
+          <div className="label-mono text-foreground/70 mb-6">Book us for your next event</div>
           <h1 className="font-display font-extrabold uppercase tracking-tighter text-[48px] sm:text-[80px] lg:text-[112px] leading-[0.88] max-w-5xl">
             We Play <span className="text-gold italic font-light">Live,</span><br className="sm:hidden"/>{" "}
             Really <span className="text-gold italic font-light">Loud</span>
@@ -285,6 +285,19 @@ function Tracklist() {
     });
   }, []);
 
+  // Stop audio when another media source takes over
+  useEffect(() => {
+    const handler = () => {
+      if (audioRef.current && !audioRef.current.paused) {
+        audioRef.current.pause();
+        setActiveIdx(null);
+        setProgress(0);
+      }
+    };
+    window.addEventListener("ft:stop-media", handler);
+    return () => window.removeEventListener("ft:stop-media", handler);
+  }, []);
+
   const toggle = (i: number) => {
     if (activeIdx === i && audioRef.current && !audioRef.current.paused) {
       audioRef.current.pause();
@@ -294,6 +307,8 @@ function Tracklist() {
     if (audioRef.current) {
       audioRef.current.pause();
     }
+    // Stop any playing video before starting audio
+    window.dispatchEvent(new Event("ft:stop-media"));
     const a = new Audio(TRACKLIST[i].src);
     audioRef.current = a;
     a.addEventListener("timeupdate", () => {
@@ -335,25 +350,59 @@ function Tracklist() {
 }
 
 function VideoCard({ src, poster }: { src: string; poster: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  // Stop this video when another media source takes over
+  useEffect(() => {
+    const handler = () => {
+      const v = videoRef.current;
+      if (v && !v.paused) {
+        v.pause();
+        setPlaying(false);
+      }
+    };
+    window.addEventListener("ft:stop-media", handler);
+    return () => window.removeEventListener("ft:stop-media", handler);
+  }, []);
+
+  const toggle = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (playing) {
+      v.pause();
+      setPlaying(false);
+    } else {
+      // Stop all other media (audio tracks + other videos)
+      window.dispatchEvent(new Event("ft:stop-media"));
+      // Always jump to 5 s on every fresh play
+      v.currentTime = 5;
+      v.play().catch(() => {});
+      setPlaying(true);
+    }
+  };
+
   return (
     <div className="group relative aspect-video overflow-hidden rounded-2xl border border-border bg-card">
       <video
+        ref={videoRef}
         src={src}
         poster={poster}
-        muted
-        loop
         playsInline
-        preload="none"
+        preload="metadata"
         className="absolute inset-0 h-full w-full object-cover"
-        onMouseEnter={(e) => { (e.currentTarget as HTMLVideoElement).play().catch(() => {}); }}
-        onMouseLeave={(e) => { const v = e.currentTarget as HTMLVideoElement; v.pause(); v.currentTime = 0; }}
+        onEnded={() => setPlaying(false)}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent group-hover:from-black/20 transition" />
-      <div className="absolute bottom-5 right-5">
-        <div className="h-12 w-12 shrink-0 rounded-full bg-gold text-background flex items-center justify-center group-hover:scale-110 transition shadow-xl">
-          <Play className="h-5 w-5 ml-0.5" fill="currentColor" />
-        </div>
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent transition" />
+      <button
+        onClick={toggle}
+        aria-label={playing ? "Pause video" : "Play video"}
+        className="absolute bottom-5 right-5 h-12 w-12 shrink-0 rounded-full bg-gold text-background flex items-center justify-center hover:scale-110 transition shadow-xl"
+      >
+        {playing
+          ? <Pause className="h-5 w-5" fill="currentColor" />
+          : <Play className="h-5 w-5 ml-0.5" fill="currentColor" />}
+      </button>
     </div>
   );
 }
