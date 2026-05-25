@@ -22,6 +22,19 @@ function BookingsPage() {
   const [authedEmail, setAuthedEmail] = useState<string | null>(null);
   const [needsRole, setNeedsRole] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+  const [debugInfo, setDebugInfo] = useState<{
+    sessionUser: any;
+    rolesData: any;
+    rolesError: any;
+    bookingsError: any;
+    bookingsCount: number | null;
+  }>({
+    sessionUser: null,
+    rolesData: null,
+    rolesError: null,
+    bookingsError: null,
+    bookingsCount: null,
+  });
 
   useEffect(() => { void init(); }, []);
 
@@ -30,6 +43,21 @@ function BookingsPage() {
     if (!session) { navigate({ to: "/auth" }); return; }
     setAuthedEmail(session.user.email ?? null);
     setUserId(session.user.id);
+    
+    // Fetch roles for debugging
+    const { data: roles, error: rolesErr } = await supabase.from("user_roles").select("*");
+    
+    setDebugInfo(prev => ({
+      ...prev,
+      sessionUser: {
+        id: session.user.id,
+        email: session.user.email,
+        role: session.user.role,
+      },
+      rolesData: roles,
+      rolesError: rolesErr ? rolesErr.message : null,
+    }));
+
     await load();
   }
 
@@ -37,9 +65,17 @@ function BookingsPage() {
     setLoading(true);
     const { data, error } = await supabase.from("bookings").select("*").order("created_at", { ascending: false });
     setLoading(false);
+    
+    setDebugInfo(prev => ({
+      ...prev,
+      bookingsError: error ? error.message : null,
+      bookingsCount: data ? data.length : 0,
+    }));
+
     if (error) { setNeedsRole(true); return; }
     setBookings(data as Booking[]);
   }
+
 
   async function grantSelf() {
     if (!userId) return;
@@ -123,6 +159,13 @@ function BookingsPage() {
           </div>
         ))}
       </div>}
+
+      <div className="mt-12 p-6 rounded-2xl border border-dashed border-border bg-card/20 text-foreground">
+        <h4 className="text-sm font-semibold mb-3">Debug Information</h4>
+        <pre className="text-xs overflow-auto max-h-60 p-3 bg-black/40 rounded-lg text-emerald-400">
+          {JSON.stringify(debugInfo, null, 2)}
+        </pre>
+      </div>
     </div>
   );
 }
