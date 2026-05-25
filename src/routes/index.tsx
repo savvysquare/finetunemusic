@@ -353,13 +353,27 @@ function VideoCard({ src, poster }: { src: string; poster: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
 
-  // Stop this video when another media source takes over
+  // Once metadata is available, seek to 10 s so that frame is shown as the thumbnail
+  const handleMetadata = () => {
+    const v = videoRef.current;
+    if (v) v.currentTime = 10;
+  };
+
+  // Restore the 10 s thumbnail frame after the video ends
+  const handleEnded = () => {
+    const v = videoRef.current;
+    setPlaying(false);
+    if (v) v.currentTime = 10;
+  };
+
+  // Stop this video when another media source takes over, then restore thumbnail
   useEffect(() => {
     const handler = () => {
       const v = videoRef.current;
       if (v && !v.paused) {
         v.pause();
         setPlaying(false);
+        v.currentTime = 10;
       }
     };
     window.addEventListener("ft:stop-media", handler);
@@ -372,10 +386,12 @@ function VideoCard({ src, poster }: { src: string; poster: string }) {
     if (playing) {
       v.pause();
       setPlaying(false);
+      // Restore the 10 s thumbnail when manually paused
+      v.currentTime = 10;
     } else {
       // Stop all other media (audio tracks + other videos)
       window.dispatchEvent(new Event("ft:stop-media"));
-      // Always jump to 5 s on every fresh play
+      // Start playback from 5 s as requested
       v.currentTime = 5;
       v.play().catch(() => {});
       setPlaying(true);
@@ -391,7 +407,8 @@ function VideoCard({ src, poster }: { src: string; poster: string }) {
         playsInline
         preload="metadata"
         className="absolute inset-0 h-full w-full object-cover"
-        onEnded={() => setPlaying(false)}
+        onLoadedMetadata={handleMetadata}
+        onEnded={handleEnded}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent transition" />
       <button
