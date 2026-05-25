@@ -19,7 +19,7 @@ function About() {
         <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 h-full flex flex-col justify-end pb-16">
           <div className="label-mono text-foreground/70 mb-6">About FineTune</div>
           <h1 className="font-display font-extrabold uppercase tracking-tighter text-[44px] sm:text-[80px] lg:text-[112px] leading-[0.88] max-w-5xl">
-            Professionalism <span className="text-gold italic font-light">nurtured by<br/>experience.</span>
+            <span className="text-gold italic font-light">Nurtured by<br/>experience.</span>
           </h1>
         </div>
       </section>
