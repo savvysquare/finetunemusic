@@ -185,13 +185,6 @@ function BookingsPage() {
           </div>
         ))}
       </div>}
-
-      <div className="mt-12 p-6 rounded-2xl border border-dashed border-border bg-card/20 text-foreground">
-        <h4 className="text-sm font-semibold mb-3">Debug Information</h4>
-        <pre className="text-xs overflow-auto max-h-60 p-3 bg-black/40 rounded-lg text-emerald-400">
-          {JSON.stringify(debugInfo, null, 2)}
-        </pre>
-      </div>
     </div>
   );
 }
