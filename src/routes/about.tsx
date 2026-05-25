@@ -13,7 +13,7 @@ function About() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative h-[50vh] min-h-[380px] w-full overflow-hidden">
+      <section className="relative h-[45vh] min-h-[320px] w-full overflow-hidden">
         <img src={g1} alt="" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-background" />
         <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 h-full flex flex-col justify-end pb-16">
