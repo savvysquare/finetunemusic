@@ -13,13 +13,13 @@ function About() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative h-[70vh] min-h-[480px] w-full overflow-hidden">
+      <section className="relative h-[50vh] min-h-[380px] w-full overflow-hidden">
         <img src={g1} alt="" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-background" />
         <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 h-full flex flex-col justify-end pb-16">
           <div className="label-mono text-foreground/70 mb-6">About FineTune</div>
           <h1 className="font-display font-extrabold uppercase tracking-tighter text-[44px] sm:text-[80px] lg:text-[112px] leading-[0.88] max-w-5xl">
-            <span className="text-gold italic font-light">Nurtured by<br/>experience.</span>
+            Nurtured by <span className="text-gold italic font-light">experience.</span>
           </h1>
         </div>
       </section>
