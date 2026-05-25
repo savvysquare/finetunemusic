@@ -356,14 +356,14 @@ function VideoCard({ src, poster }: { src: string; poster: string }) {
   // Once metadata is available, seek to 10 s so that frame is shown as the thumbnail
   const handleMetadata = () => {
     const v = videoRef.current;
-    if (v) v.currentTime = 10;
+    if (v) v.currentTime = 15;
   };
 
   // Restore the 10 s thumbnail frame after the video ends
   const handleEnded = () => {
     const v = videoRef.current;
     setPlaying(false);
-    if (v) v.currentTime = 10;
+    if (v) v.currentTime = 15;
   };
 
   // Stop this video when another media source takes over, then restore thumbnail
@@ -391,8 +391,8 @@ function VideoCard({ src, poster }: { src: string; poster: string }) {
     } else {
       // Stop all other media (audio tracks + other videos)
       window.dispatchEvent(new Event("ft:stop-media"));
-      // Start playback from 5 s as requested
-      v.currentTime = 5;
+      // Start playback from the beginning
+      v.currentTime = 0;
       v.play().catch(() => {});
       setPlaying(true);
     }
