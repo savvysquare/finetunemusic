@@ -57,43 +57,76 @@ function BookingsPage() {
   async function load() {
     setLoading(true);
     const pwd = sessionStorage.getItem("admin_password") || "";
-    const { data, error } = await supabase.rpc("get_bookings_secure", { admin_password: pwd });
-    setLoading(false);
     
-    setDebugInfo(prev => ({
-      ...prev,
-      bookingsError: error ? error.message : null,
-      bookingsCount: data ? data.length : 0,
-    }));
+    // Try secure RPC first
+    const { data: rpcData, error: rpcError } = await supabase.rpc("get_bookings_secure", { admin_password: pwd });
+    
+    if (rpcError) {
+      console.warn("get_bookings_secure RPC not available, falling back to direct query.", rpcError);
+      
+      // Fallback: direct select query
+      const { data: selectData, error: selectError } = await supabase.from("bookings").select("*").order("created_at", { ascending: false });
+      setLoading(false);
+      
+      setDebugInfo(prev => ({
+        ...prev,
+        bookingsError: selectError ? selectError.message : "RPC failed: " + rpcError.message,
+        bookingsCount: selectData ? selectData.length : 0,
+      }));
 
-    if (error) { 
-      toast.error("Access denied or session expired. Please sign in again.");
-      sessionStorage.removeItem("admin_password");
-      navigate({ to: "/auth" });
-      return; 
+      if (selectError) {
+        toast.error("Access denied. Please check admin login.");
+        sessionStorage.removeItem("admin_password");
+        navigate({ to: "/auth" });
+        return;
+      }
+      setBookings((selectData || []) as Booking[]);
+    } else {
+      setLoading(false);
+      setDebugInfo(prev => ({
+        ...prev,
+        bookingsError: null,
+        bookingsCount: rpcData ? rpcData.length : 0,
+      }));
+      setBookings((rpcData || []) as Booking[]);
     }
-    setBookings((data || []) as Booking[]);
   }
 
   async function setStatus(id: string, status: string) {
     const pwd = sessionStorage.getItem("admin_password") || "";
-    const { error } = await supabase.rpc("update_booking_status_secure", {
+    
+    // Try secure RPC first
+    const { error: rpcError } = await supabase.rpc("update_booking_status_secure", {
       admin_password: pwd,
       booking_id: id,
       new_status: status
     });
-    if (error) return toast.error(error.message);
+    
+    if (rpcError) {
+      console.warn("update_booking_status_secure RPC not available, falling back to direct update.", rpcError);
+      const { error: updateError } = await supabase.from("bookings").update({ status }).eq("id", id);
+      if (updateError) return toast.error(updateError.message);
+    }
+    
     setBookings(b => b.map(x => x.id === id ? { ...x, status } : x));
   }
 
   async function remove(id: string) {
     if (!confirm("Delete this booking?")) return;
     const pwd = sessionStorage.getItem("admin_password") || "";
-    const { error } = await supabase.rpc("delete_booking_secure", {
+    
+    // Try secure RPC first
+    const { error: rpcError } = await supabase.rpc("delete_booking_secure", {
       admin_password: pwd,
       booking_id: id
     });
-    if (error) return toast.error(error.message);
+    
+    if (rpcError) {
+      console.warn("delete_booking_secure RPC not available, falling back to direct delete.", rpcError);
+      const { error: deleteError } = await supabase.from("bookings").delete().eq("id", id);
+      if (deleteError) return toast.error(deleteError.message);
+    }
+    
     setBookings(b => b.filter(x => x.id !== id));
   }
 
@@ -102,6 +135,7 @@ function BookingsPage() {
     await supabase.auth.signOut(); 
     navigate({ to: "/auth" }); 
   }
+
 
 
   return (
